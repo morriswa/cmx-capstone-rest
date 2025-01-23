@@ -1,0 +1,26 @@
+### venv ###
+bin/
+include/
+lib/
+pyvenv.cfg
+Scripts
+
+### ides ###
+.idea/
+
+### testing ###
+.coverage
+
+### pyjunk ###
+**/__pycache__/
+**.egg-info
+build/
+testdb
+
+### mac junk ###
+**/.DS_Store
+
+### secrets ###
+*.properties
+!default.properties
+!test.properties
