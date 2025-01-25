@@ -1,7 +1,7 @@
 # CMX Capstone Rest API
 
 ## Contributors
-- William Morris [morriswa] william@morriswa.org
+- William Morris [morriswa] morris.william@ku.edu
 - Kevin Rivers [Kabuto1357] kevin.rivers14832@ku.edu
 
 
@@ -37,14 +37,18 @@
 
       pip install -e .
 - Create local app environment file 'secrets.properties' in project root directory
-- Include environment variables in secrets.properties
-- Setup development database
+- And include following line in file.
+
+      SECRET_KEY=enter_random_string_here
+- Create database tables/sequences/etc
 
       python manage.py migrate
 - Run on local machine http://localhost:8000
-      
        
       python manage.py runserver
+
+
+
 ## Test Setup Guide
 - Log into postgres console on your machine with admin credential 
 and run following commands
@@ -60,6 +64,8 @@ and run following commands
       
       coverage run test.py
       coverage report -m
+
+
 
 ## Django Migrate Guide
 please note all database scripts are located in src/core/migrations 

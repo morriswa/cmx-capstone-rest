@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 
 # Load test properties
-load_dotenv('test.properties')
+load_dotenv('test.properties', override=True)
 # Include all default settings
 from app.settings import *
 

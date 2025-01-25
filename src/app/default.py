@@ -3,8 +3,9 @@
 
 from dotenv import load_dotenv
 
-# load secrets to ENV
-load_dotenv('secrets.properties')
+# load secrets file to ENV
+# WARNING: will override set ENV_VARS
+load_dotenv('secrets.properties', override=True)
 
 # Include all default settings
 from app.settings import *
