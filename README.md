@@ -40,7 +40,20 @@
 - And include following line in file.
 
       SECRET_KEY=enter_random_string_here
-- Create database tables/sequences/etc
+- Open Postgres Admin app (PgAdmin4, Beekeeper, Postgres Desktop, etc)
+- Open console to root database (usually 'postgres') 
+as root user (usually 'postgres') and input...
+
+      create role cmx_capstone_app_admin_role with login password 'password';
+      create database cmx_capstone_app;
+      grant create on database cmx_capstone_app to cmx_capstone_app_admin_role;
+- Close console
+- Open new console to new database 'cmx_capstone_app'
+as root user (usually 'postgres') and input...
+
+      grant create on schema public to cmx_capstone_app_admin_role;
+- Close Postgres Admin app and return to cmx-capstone-rest project
+- Create database tables/sequences/etc with Django
 
       python manage.py migrate
 - Run on local machine http://localhost:8000
@@ -50,10 +63,12 @@
 
 
 ## Test Setup Guide
-- Log into postgres console on your machine with admin credential 
-and run following commands
+- Open Postgres Admin app (PgAdmin4, Beekeeper, Postgres Desktop, etc)
+- Open console to root database (usually 'postgres') 
+as root user (usually 'postgres') and input...
 
       create role testuser with createdb login password 'testpassword';
+- Close Postgres Admin app and return to cmx-capstone-rest project
 - Run test script
       
       python test.py
