@@ -22,3 +22,9 @@ def permissions(request: Request):
 def get_search_history(request: Request):
     history = daos.get_search_history(request.user.user_id)
     return Response(status=200, data=[item.json() for item in history])
+
+@user_view(['POST'])
+def post_search(request: Request):
+    prompt_text = request.data.get('prompt_text')
+    new_chat = daos.post_search(request.user.user_id, prompt_text)
+    return Response(status=200, data=new_chat.json())
