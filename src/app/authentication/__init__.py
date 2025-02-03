@@ -1,9 +1,8 @@
-import logging
 
+import logging
 import jwt
 from typing import override, Optional
 
-from django.conf import settings
 from rest_framework.authentication import BaseAuthentication, BasicAuthentication, SessionAuthentication
 from rest_framework import exceptions
 
@@ -36,10 +35,10 @@ class UserAuthenticationWithJwt(BaseAuthentication):
             email = payload.get('email')
 
             # attempt retrieving user info from db using authentication email
-            user_id, db_permissions = get_user_info(email)
+            user_id = get_user_info(email)
 
             # create custom django user with retrieved info
-            user = User(email=email, user_id=user_id, db_permissions=db_permissions, jwt_permissions=jwt_permissions)
+            user = User(email=email, user_id=user_id, jwt_permissions=jwt_permissions)
             logging.info(f'successfully authenticated user {user.user_id} '
                          f'with email {user.email} and granted permissions {user.permissions}')
             return user, payload
@@ -51,7 +50,8 @@ class UserAuthenticationWithJwt(BaseAuthentication):
             raise exceptions.AuthenticationFailed('Error decoding token.')
         except jwt.InvalidTokenError:
             raise exceptions.AuthenticationFailed('Invalid token.')
-        except:
+        except Exception as e:
+            logging.error(e)
             raise exceptions.AuthenticationFailed('Failed to authenticate, no further details.')
 
 DJANGO_USER_AUTHENTICATION_CLASSES = [BasicAuthentication, SessionAuthentication, UserAuthenticationWithJwt]

@@ -23,8 +23,8 @@ def get_search_history(user_id) -> list[SearchPromptHistory]:
     ]
 
 def post_search(user_id, prompt_text) -> list[SearchPromptHistory]:
-    return  SearchPromptHistory(
-            chat_id=4,
-            prompt_text=prompt_text,
-            date_created="2024-02-04"
-        )
+    return SearchPromptHistory(
+        chat_id=4,
+        prompt_text=prompt_text,
+        date_created="2024-02-04"
+    )

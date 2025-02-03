@@ -1,9 +1,7 @@
 import logging
 from typing import override
 
-from django.conf import settings
 from rest_framework.permissions import BasePermission, IsAuthenticated
-from rest_framework import exceptions
 
 from app.authentication import User
 
@@ -33,4 +31,3 @@ def WithPermissions(permissions):
     return HasPermission
 
 DJANGO_USER_PERMISSION_CLASSES = [IsAuthenticated]
-DJANGO_UNVERIFIED_USER_PERMISSION_CLASSES = [IsAuthenticated]
