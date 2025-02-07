@@ -31,4 +31,7 @@ urlpatterns = [
     # jwt secure endpoints
     path('s/health', core_views.secure_health),
     path('s/permissions', core_views.permissions),
+    path('s/history', core_views.get_search_history),
+    path('s/ask', core_views.post_search),
+
 ]

@@ -4,10 +4,8 @@ from django.conf import settings
 from rest_framework.response import Response
 from rest_framework.decorators import permission_classes, authentication_classes, api_view
 
-from app.authentication import (UserAuthenticationWithJwt,
-                                DJANGO_USER_AUTHENTICATION_CLASSES)
-from app.permissions import (DJANGO_USER_PERMISSION_CLASSES,
-                             DJANGO_UNVERIFIED_USER_PERMISSION_CLASSES)
+from app.authentication import DJANGO_USER_AUTHENTICATION_CLASSES
+from app.permissions import DJANGO_USER_PERMISSION_CLASSES
 
 
 def requires_permissions(
@@ -55,31 +53,11 @@ def any_view(methods):
     return __customized_view(methods, [], [])
 
 
-def unverified_user_view(methods):
-    """ view for secured requests
-        includes error handling from morriswa package"""
-    return __customized_view(
-        methods,
-        DJANGO_UNVERIFIED_USER_PERMISSION_CLASSES,
-        DJANGO_USER_AUTHENTICATION_CLASSES
-    )
-
-
 def user_view(methods):
     """ view for secured requests
         includes error handling from morriswa package"""
     return __customized_view(
         methods,
         DJANGO_USER_PERMISSION_CLASSES,
-        DJANGO_USER_AUTHENTICATION_CLASSES
-    )
-
-
-def mod_view(methods):
-    """ view for secured requests
-        includes error handling from morriswa package"""
-    return __customized_view(
-        methods,
-        DJANGO_MOD_PERMISSION_CLASSES,
         DJANGO_USER_AUTHENTICATION_CLASSES
     )
