@@ -15,3 +15,8 @@ def secure_health(request):
 @unverified_user_view(['GET'])
 def permissions(request):
     return Response(status=200, data=request.user.permissions or [])
+
+# NOTE example for using ML builds to generate predictions...
+# def thing_one():
+#     from cmx_capstone_ml_morriswa.predict import predict
+#     output = predict("string")

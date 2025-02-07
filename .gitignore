@@ -14,7 +14,8 @@ Scripts
 ### pyjunk ###
 **/__pycache__/
 **.egg-info
-build/
+build
+share
 testdb
 
 ### mac junk ###
