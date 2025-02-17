@@ -29,7 +29,15 @@ def post_search(request: Request):
     new_chat = daos.post_search(request.user.user_id, prompt_text)
     return Response(status=200, data=new_chat.json())
 
+@user_view(['GET'])
+def search_result(request: Request):
+    result = daos.get_search_result(request.user.user_id)
+    return Response(status=200, data=[item.json() for item in result])
 
+# @user_view(['GET'])
+# def results_details(request: Request):
+#     result = daos.get_result_details(request.user.user_id)
+#     return Response(status=200, data=[item.json() for item in result])
 # NOTE example for using ML builds to generate predictions...
 # def thing_one():
 #     from cmx_capstone_ml_morriswa.predict import predict
