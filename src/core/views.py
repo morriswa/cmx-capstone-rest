@@ -32,7 +32,7 @@ def post_search(request: Request):
 @user_view(['GET'])
 def get_chat_log(request: Request):
     result = daos.get_chat_log(request.user.user_id)
-    return Response(status=200, data=[item.json() for item in result])
+    return Response(status=200, data=result)
 
 # @user_view(['GET'])
 # def results_details(request: Request):

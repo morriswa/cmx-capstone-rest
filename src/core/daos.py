@@ -36,6 +36,8 @@ def post_search(user_id, prompt_text) -> list[SearchPromptHistory]:
 def get_chat_log(chat_id) -> list[SearchPromptHistory]:
     #Let's define some mock data.
     #We will get the current time.
+
+    chat_id = 1
     current_time = datetime.datetime.now()
     #A list of chat logs.
     chat_logs = {
@@ -44,21 +46,15 @@ def get_chat_log(chat_id) -> list[SearchPromptHistory]:
             {"type": "Text", "payload": "How can I help you?"}
         ],
         2: [
-            {"type": "Image", "payload": "What time is it?"},
+            {"type": "Text", "payload": "What time is it?"},
             {"type": "Text", "payload": current_time}
         ]
     }
 
-    #Now, let's check if the chat_id exists.
-    if(chat_id in chat_logs):
-        response = {
-            "user": "Y",
-            "data": chat_logs[chat_id]
-        }
-    else:
-        response = {
-            "user": "N",
-            "data": []
-        }
+    return {
+        "user": "Y" if chat_id in chat_logs else "N",
+        "data": chat_logs.get(chat_id, "That chat_id was not found")  # Ensure `data` is always a list
+    }
 
-    return response
+
+    #Once we start actually putting data in our PostGreSQL database, SQL statements will be used instead

@@ -33,6 +33,6 @@ urlpatterns = [
     path('s/permissions', core_views.permissions),
     path('s/history', core_views.get_search_history),
     path('s/ask', core_views.post_search),
-    path('s/chat', core_views.get_chat_log)
+    path('s/chats', core_views.get_chat_log)
 
 ]
