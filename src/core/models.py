@@ -5,10 +5,5 @@ class SearchPromptHistory(ValidatedDataModel):
         self.chat_id = kwargs.get('chat_id')
         self.prompt_text = kwargs.get('prompt_text')
         self.date_created=kwargs.get('date_created')
-        self.result_id=kwargs.get('result_id')
-        self.title=kwargs.get('title')
-        self.url=kwargs.get('url')
-        self.summary=kwargs.get('summary')
-        self.description=kwargs.get('description')
-        self.source=kwargs.get('source')
+        
 

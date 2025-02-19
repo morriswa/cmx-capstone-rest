@@ -30,8 +30,8 @@ def post_search(request: Request):
     return Response(status=200, data=new_chat.json())
 
 @user_view(['GET'])
-def search_result(request: Request):
-    result = daos.get_search_result(request.user.user_id)
+def get_chat_log(request: Request):
+    result = daos.get_chat_log(request.user.user_id)
     return Response(status=200, data=[item.json() for item in result])
 
 # @user_view(['GET'])
