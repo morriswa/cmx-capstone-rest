@@ -2,7 +2,9 @@ from core.models import SearchPromptHistory
 import datetime
 
 
-
+#This function will get the search history of the user. KR
+#It will return a list of prompts that the user has made. KR
+#This function will later be updated with SQL statements to get the data from the database. KR
 def get_search_history(user_id) -> list[SearchPromptHistory]:
 
     return [
@@ -24,7 +26,9 @@ def get_search_history(user_id) -> list[SearchPromptHistory]:
             date_created="2024-02-04"
         )
     ]
-
+#This function will post a search prompt to the database. KR
+#It will return the prompt that was posted. KR
+#This function will later be updated with SQL statements to post the data to the database. KR
 def post_search(user_id, prompt_text) -> list[SearchPromptHistory]:
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
     return SearchPromptHistory(
