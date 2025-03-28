@@ -18,7 +18,7 @@ from app.exceptions import APIException
 
 __aws_region = os.getenv('AWS_REGION')
 __aws_env = os.getenv('AWS_ENVIRONMENT')
-__bedrock_client = boto3.client(service_name='bedrock-agent-runtime')
+__bedrock_client = boto3.client(service_name='bedrock-agent-runtime', region_name=__aws_region)
 __bedrock_flow_id = os.getenv('AWS_BEDROCK_FLOW_ID')
 __bedrock_flow_alias_id = os.getenv('AWS_BEDROCK_FLOW_ALIAS_ID')
 __log = logging.getLogger(__name__)
