@@ -1,5 +1,6 @@
 from core.models import SearchPromptHistory
 import datetime
+from core.views import any_view, user_view
 
 
 #This function will get the search history of the user. KR
@@ -62,3 +63,6 @@ def get_chat_log(chat_id) -> list[SearchPromptHistory]:
 
 
     #Once we start actually putting data in our PostGreSQL database, SQL statements will be used instead
+
+def save_question_answer_pair(question, answer): 
+    pass

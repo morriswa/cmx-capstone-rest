@@ -24,12 +24,17 @@ def permissions(request: Request):
 def get_search_history(request: Request):
     history = daos.get_search_history(request.user.user_id)
     return Response(status=200, data=[item.json() for item in history])
+
+
 #This is a simple post endpoint to make a search prompt KR
 @user_view(['POST'])
 def post_search(request: Request):
     prompt_text = request.data.get('prompt_text')
-    new_chat = daos.post_search(request.user.user_id, prompt_text)
+    # a = bedrock_client.ask(prompt_text)
+    a = "This is a test"
+    new_chat = daos.post_search(request.user.user_id, prompt_text,a)
     return Response(status=200, data=new_chat.json())
+
 #This is to get the chat log for specific users. KR
 @user_view(['GET'])
 def get_chat_log(request: Request):
