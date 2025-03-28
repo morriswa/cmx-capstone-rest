@@ -14,7 +14,7 @@ from botocore.config import Config
 
 __s3_client = boto3.client(
     "s3",
-    endpoint_url=f'https://s3.{os.getenv('AWS_S3_REGION')}.amazonaws.com',
+    endpoint_url=f'https://s3.{os.getenv('AWS_REGION')}.amazonaws.com',
 )
 __log = logging.getLogger(__name__)
 __s3_bucket = os.getenv('AWS_S3_BUCKET')
