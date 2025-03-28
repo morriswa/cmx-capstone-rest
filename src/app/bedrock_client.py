@@ -69,7 +69,7 @@ def __invoke_flow(question):
 
             # Print the model output.
             elif 'flowOutputEvent' in event:
-                output.append(event['flowOutputEvent']['content']['document'])
+                output += event['flowOutputEvent']['content']['document'].split('\n\n')
 
             elif 'flowTraceEvent' in event:
                 __log.error("Flow trace:  %s", event['flowTraceEvent'])
@@ -82,7 +82,7 @@ def __invoke_flow(question):
     except Exception as e:
         __log.error("An error occurred: %s", {str(e)})
 
-    if status != "SUCCESS":
+    if flow_status != "SUCCESS":
         raise APIException(f"Flow {__bedrock_flow_id} failed with status {status}")
 
     # The flow completed successfully.
