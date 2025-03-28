@@ -27,12 +27,13 @@ handler404 = lambda *args, **kwargs: HttpResponse(status=404)
 urlpatterns = [
     # public endpoints
     path('health', core_views.health),
-    path('anon_ask', core_views.anon_ask),
 
     # jwt secure endpoints
     path('s/health', core_views.secure_health),
     path('s/permissions', core_views.permissions),
+
+    # chat stuff
     path('s/history', core_views.get_search_history),
-    path('s/ask', core_views.post_search),
+    path('s/chat', core_views.create_chat),
     path('s/chat/<str:chat_id>', core_views.get_chat_log)
 ]
