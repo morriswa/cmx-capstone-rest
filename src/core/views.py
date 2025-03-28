@@ -19,6 +19,11 @@ def secure_health(request: Request):
 @user_view(['GET'])
 def permissions(request: Request):
     return Response(status=200, data=request.user.permissions or [])
+
+
+
+
+
 #This is a simple get endpoint to get the the history of the user's searches KR
 @user_view(['GET'])
 def get_search_history(request: Request):
@@ -30,15 +35,14 @@ def get_search_history(request: Request):
 @user_view(['POST'])
 def post_search(request: Request):
     prompt_text = request.data.get('prompt_text')
-    # a = bedrock_client.ask(prompt_text)
-    a = "This is a test"
-    new_chat = daos.post_search(request.user.user_id, prompt_text,a)
-    return Response(status=200, data=new_chat.json())
+    a = bedrock_client.ask(prompt_text)
+    new_chat = daos.save_question_answer_pair(request.user.user_id, prompt_text,a)
+    return Response(status=200, data=new_chat)
 
 #This is to get the chat log for specific users. KR
 @user_view(['GET'])
-def get_chat_log(request: Request):
-    result = daos.get_chat_log(request.user.user_id)
+def get_chat_log(request: Request, chat_id):
+    result = daos.get_chat_log(request.user.user_id, chat_id)
     return Response(status=200, data=result)
 
 # @user_view(['GET'])

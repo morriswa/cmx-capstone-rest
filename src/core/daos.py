@@ -1,6 +1,8 @@
 from core.models import SearchPromptHistory
 import datetime
 from core.views import any_view, user_view
+from app import database
+import json
 
 
 #This function will get the search history of the user. KR
@@ -37,32 +39,39 @@ def post_search(user_id, prompt_text) -> list[SearchPromptHistory]:
         prompt_text=prompt_text,
         date_created=current_date
     )
+def get_chat_log(user_id, chat_id):
+    with database.cursor() as cur: 
+        cur.execute("""
+                     SELECT * FROM chat_history WHERE chat_id = %(chat_id)s
+                    and user_id = %(user_id)s; 
+        
+        """, {'chat_id': chat_id,
+              'user_id':user_id})
+        rows = cur.fetchall()
+        return rows
+ 
 
-def get_chat_log(chat_id) -> list[SearchPromptHistory]:
-    #Let's define some mock data.
-    #We will get the current time.
-
-    chat_id = 1
-    current_time = datetime.datetime.now()
-    #A list of chat logs.
-    chat_logs = {
-        1: [
-            {"type": "Text", "payload": "Hey there!"},
-            {"type": "Text", "payload": "How can I help you?"}
-        ],
-        2: [
-            {"type": "Text", "payload": "What time is it?"},
-            {"type": "Text", "payload": current_time}
-        ]
-    }
-
-    return {
-        "user": "Y" if chat_id in chat_logs else "N",
-        "data": chat_logs.get(chat_id, "That chat_id was not found")  # Ensure `data` is always a list
-    }
-
-
-    #Once we start actually putting data in our PostGreSQL database, SQL statements will be used instead
-
-def save_question_answer_pair(question, answer): 
-    pass
+def save_question_answer_pair(user_id,question, answer): 
+    with database.cursor() as cur: 
+        cur.execute("""
+            INSERT INTO chat_history (chat_id, user_id, created, last_updated, q, a)
+            VALUES
+               (DEFAULT,%(user_id)s,
+                DEFAULT, DEFAULT, %(q)s, %(a)s) returning chat_id;
+    """,{'user_id': user_id,
+         'q': question, 
+         'a': json.dumps(answer)
+         }
+        )
+        chat_id = cur.fetchone().get("chat_id")
+    
+        cur.execute("""
+            SELECT * FROM chat_history WHERE chat_id = %(chat_id)s
+                    and user_id = %(user_id)s; 
+        
+        """, {'chat_id': chat_id,
+              'user_id': user_id})
+        rows = cur.fetchall()
+        return rows
+    
+        
