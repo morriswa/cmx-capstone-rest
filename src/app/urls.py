@@ -27,6 +27,7 @@ handler404 = lambda *args, **kwargs: HttpResponse(status=404)
 urlpatterns = [
     # public endpoints
     path('health', core_views.health),
+    path('anon_ask', core_views.anon_ask),
 
     # jwt secure endpoints
     path('s/health', core_views.secure_health),

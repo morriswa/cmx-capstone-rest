@@ -4,6 +4,7 @@ from rest_framework.request import Request
 from app.decorators import any_view, user_view
 from core import daos
 
+from app import bedrock_client
 
 #This is a simple health check endpoint to make sure the server is running KR
 @any_view(['GET'])
@@ -43,3 +44,9 @@ def get_chat_log(request: Request):
 # def thing_one():
 #     from cmx_capstone_ml_morriswa.predict import predict
 #     output = predict("string")
+
+@any_view(['GET'])
+def anon_ask(request: Request):
+    q = request.data['question']
+    a = bedrock_client.ask(q)
+    return Response(status=200, data=a)
