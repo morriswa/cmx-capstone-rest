@@ -21,7 +21,7 @@ class UserAuthenticationWithJwtTests(TestCase):
 
         # setup
         mock_user_id = uuid.uuid4()
-        mock_get_user_info_from_db.return_value = mock_user_id, []
+        mock_get_user_info_from_db.return_value = mock_user_id
         mock_jwt_decode_token.return_value = {
             'permissions': [],
             'email': 'test@morriswa.org',
