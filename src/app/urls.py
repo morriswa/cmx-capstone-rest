@@ -18,6 +18,7 @@ from django.urls import path
 from django.http import HttpResponse
 
 import core.views as core_views
+import chat.views as chat_views
 
 # required to override django default 404
 handler404 = lambda *args, **kwargs: HttpResponse(status=404)
@@ -32,8 +33,8 @@ urlpatterns = [
     path('s/health', core_views.secure_health),
     path('s/permissions', core_views.permissions),
 
-    # chat stuff
-    path('s/history', core_views.get_search_history),
-    path('s/chat', core_views.create_chat),
-    path('s/chat/<str:chat_id>', core_views.get_chat_log)
+    # chat views
+    path('s/history', chat_views.get_search_history),
+    path('s/chat', chat_views.create_chat),
+    path('s/chat/<str:chat_id>', chat_views.get_chat_log)
 ]

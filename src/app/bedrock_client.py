@@ -9,6 +9,7 @@ __author__ = "William Morris [morriswa]"
 import logging
 import os
 from typing import Optional
+from django.conf import settings
 
 import boto3
 from botocore.exceptions import ClientError
@@ -91,5 +92,11 @@ def __invoke_flow(question):
 
 
 def ask(question) -> list[str]:
-
-    return __invoke_flow(question)
+    if settings.RUNTIME_ENVIRONMENT == "prod":
+        return __invoke_flow(question)
+    else:
+        # mock data
+        return [
+            "Good afternoon! The app is currently being run in development mode",
+            "This message is a mock response, in a production environment you would recieve a response from AWS Bedrock"
+        ]

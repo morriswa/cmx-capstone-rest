@@ -4,15 +4,16 @@ import json
 from app.exceptions import APIException
 from app import database
 
-from core.models import ChatLog, ChatBlurb
-from core.views import any_view, user_view
+from chat.models import ChatLog, ChatBlurb
 
 
-#This function will get the search history of the user. KR
-#It will return a list of prompts that the user has made. KR
-#This function will later be updated with SQL statements to get the data from the database. KR
 def get_search_history(user_id) -> list[ChatBlurb]:
     with database.cursor() as cur:
+        """
+            This function will get the search history of the user.
+            It will return a list of prompts that the user has made.
+            This function will get the data from the database. KR
+        """
         cur.execute("""
             SELECT chat_id, q, created
             FROM chat_history

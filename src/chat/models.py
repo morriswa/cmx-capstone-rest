@@ -1,9 +1,8 @@
+
 from typing import override
 
-from app.validation import ValidatedDataModel,is_blank #Super class for all data models in the app
+from app.validation import ValidatedDataModel
 
-#This is the class that when instantiated will be used for each user. KR
-#Each user will have a chat_id, prompt_text, and date_created for each session. KT
 
 class ChatLog(ValidatedDataModel):
     def __init__(self, **kwargs):

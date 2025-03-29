@@ -32,6 +32,7 @@ load_dotenv('default.properties')
 APP_MODULES = [
     'app.authentication',
     'core',
+    'chat',
 ]
 
 INSTALLED_APPS = [
