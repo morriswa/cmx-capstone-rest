@@ -8,10 +8,10 @@ class ChatLog(ValidatedDataModel):
     def __init__(self, **kwargs):
         self.user_id = kwargs.get('user_id')
         self.chat_id = kwargs.get('chat_id')
+        self.pair_id = kwargs.get('pair_id')
         self.prompt_text = kwargs.get('q')
         self.answer = kwargs.get('a')
         self.created = kwargs.get('created')
-        self.last_updated = kwargs.get('last_updated')
 
 
 class ChatBlurb(ChatLog):

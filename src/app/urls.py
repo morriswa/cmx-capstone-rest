@@ -36,5 +36,5 @@ urlpatterns = [
     # chat views
     path('s/history', chat_views.get_search_history),
     path('s/chat', chat_views.create_chat),
-    path('s/chat/<str:chat_id>', chat_views.get_chat_log)
+    path('s/chat/<str:chat_id>', chat_views.ChatView.as_view()),
 ]
