@@ -1,3 +1,4 @@
+import os
 
 # Default Deployment Settings
 
@@ -11,7 +12,7 @@ load_dotenv('secrets.properties', override=True)
 from app.settings import *
 
 # Add env specific settings
-RUNTIME_ENVIRONMENT = "local"
+RUNTIME_ENVIRONMENT = os.getenv("RUNTIME_ENVIRONMENT", "local")
 DEBUG = False
 
 # add Security Setup

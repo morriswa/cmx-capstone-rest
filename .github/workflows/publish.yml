@@ -63,6 +63,7 @@ jobs:
 
         pip install .
 
+        ./manage.py check
         ./test.py
 
         deactivate
